@@ -1,0 +1,36 @@
+# Based on http://symfony.com/doc/current/setup/web_server_configuration.html#web-server-nginx.
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server ipv6only=on;
+
+    gzip on;
+    gzip_disable "msie6";
+    gzip_vary on;
+    gzip_types
+      text/plain
+      application/json
+      application/javascript
+      application/vnd.ms-fontobject
+      application/x-font-ttf
+      application/x-javascript
+      application/x-web-app-manifest+json
+      application/xhtml+xml
+      application/xml
+      image/svg+xml
+      image/x-icon
+      text/css
+      text/xml
+      text/plain
+      text/javascript;
+
+    client_max_body_size 9m;
+
+    root /usr/share/nginx/html/web;
+    index index.php index.html index.htm;
+
+    # Make site accessible from http://localhost/
+    server_name localhost;
+
+    include symfony/*.conf;
+}
